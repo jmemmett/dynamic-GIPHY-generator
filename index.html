@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jeff's Dynamic GIPHY generator</title>
+    
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>GIPHY Search</h1>
+
+        <form id="giphy-form">
+            <label for="giphy-input">Search for a GIPHY</label>
+            <input type="text" id="giphy-input"><br>
+
+            <!-- This button will trigger our AJAX call -->
+            <input id="find-giphy" type="submit" value="GIPHY Search">
+        </form>
+
+        <!-- We'll be dumping our JSON content in here -->
+        <div id="giphy-view"></div>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        
+            // This .on("click") function will trigger the AJAX Call
+            $("#find-giphy").on("click", function(event) {
+
+                // event.preventDefault() can be used to prevent an evetn's default behavior.
+                // Here, it prevents the submit buttonf rom trying to submit a form when clicked
+                event.preventDefault();
+
+                // Here we grab the text from the input box
+                var APIkey = "SECdCMebuT9s3iJbMSBVzzXEzz4iS4LH"; // this is my specific GIPHY API key
+                var giphy = $("#giphy-input").val();
+
+                // Here we construct our URL
+                var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIkey + "&q=" + giphy + "&limit=1";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function(response) {
+                    console.log(response);
+                    var gif = response.data[0].images.original.url;
+                    console.log(gif);
+                    $("#giphy-view").html("<img src='" + gif + "'>");
+                });
+            
+            });
+        
+        </script>
+
+    </div>    
+</body>
+</html>

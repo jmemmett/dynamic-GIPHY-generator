@@ -70,6 +70,7 @@
         var newSearch = $("#giphy-input").eq(0).val();
         searchArray.push(newSearch);
         populateButtons(searchArray, "searchButton", "#buttonsArea");
+        $("#giphy-input").val("");
         return false;
     })
 

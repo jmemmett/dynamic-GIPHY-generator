@@ -55,7 +55,7 @@
 
     // changes an image from still to animated, or from animated to still when the user clicks them
     $(document).on("click", ".searchImage", function() {
-        var state = $(this).data("state");
+        var state = $(this).attr("data-state");
         if (state == "still") {
             $(this).attr("src", $(this).data("animated"));
             $(this).attr("data-state", "animated");
